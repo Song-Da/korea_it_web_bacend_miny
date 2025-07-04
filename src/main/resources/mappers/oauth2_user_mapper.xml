@@ -13,6 +13,7 @@
             provider = #{provider} and
             provider_user_id = #{providerUserId}
     </select>
+
     <insert id="addOAuth2User">
         insert into
             oauth2_user_tb

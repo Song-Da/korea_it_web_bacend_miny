@@ -32,20 +32,20 @@ public class AuthService {
 
     @Transactional(rollbackFor = Exception.class)
     public ApiRespDto<?> signup(SignupReqDto signupReqDto) {
-        // 아이디 중복 확인
+        //아이디 중복확인
         Optional<User> userByUsername = userRepository.getUserByUsername(signupReqDto.getUsername());
         if (userByUsername.isPresent()) {
-            return new ApiRespDto<>("failed", "이미 사용중인 아이디입니다.", null);
+            return new ApiRespDto<>("failed", "이미 사용 중인 아이디입니다.", null);
         }
 
-        // 이메일 중복 확인
+        //이메일 중복확인
         Optional<User> userByEmail = userRepository.getUserByEmail(signupReqDto.getEmail());
         if (userByEmail.isPresent()) {
-            return new ApiRespDto<>("failed", "이미 사용중인 이메일입니다.", null);
+            return new ApiRespDto<>("failed", "이미 사용 중인 이메일입니다.", null);
         }
 
         try {
-            // 사용자 정보 추가
+            //사용자 정보 추가
             Optional<User> optionalUser = userRepository.addUser(signupReqDto.toEntity(bCryptPasswordEncoder));
 
             if (optionalUser.isEmpty()) {

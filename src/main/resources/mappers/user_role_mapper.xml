@@ -20,11 +20,10 @@
 
     <insert id="addUserRole" useGeneratedKeys="true" keyProperty="userRoleId">
         insert into
-            user_role_tb
+        user_role_tb
         values
-            (0, #{userId}, #{roleId}, now(), null)
+        (0, #{userId}, #{roleId}, now(), null)
     </insert>
-
 
 
 </mapper>

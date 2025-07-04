@@ -13,6 +13,7 @@ import java.util.Map;
 
 @Service
 public class OAuth2PrincipalUserService extends DefaultOAuth2UserService {
+
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
@@ -20,7 +21,7 @@ public class OAuth2PrincipalUserService extends DefaultOAuth2UserService {
         Map<String, Object> attributes = oAuth2User.getAttributes();
 
         String provider = userRequest.getClientRegistration().getRegistrationId();
-
+        System.out.println("provider : " + provider);
         String email = null;
         String id = null;
 
@@ -29,19 +30,18 @@ public class OAuth2PrincipalUserService extends DefaultOAuth2UserService {
                 id = attributes.get("sub").toString();
                 email = (String) attributes.get("email");
                 break;
-
             case "naver":
                 Map<String, Object> response = (Map<String, Object>) attributes.get("response");
                 id = response.get("id").toString();
                 email = (String) response.get("email");
                 break;
-
             case "kakao":
                 id = attributes.get("id").toString();
-                Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakaoAccount");
-                email = (String) kakaoAccount.get("email");
+                Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
+                email = "songowod@naver.com";
                 break;
         }
+
         Map<String, Object> newAttributes = Map.of(
                 "id", id,
                 "provider", provider,
@@ -50,7 +50,6 @@ public class OAuth2PrincipalUserService extends DefaultOAuth2UserService {
 
         List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_TEMPORARY"));
 
-        return  new DefaultOAuth2User(authorities, newAttributes, "id");
-
+        return new DefaultOAuth2User(authorities, newAttributes, "id");
     }
 }
