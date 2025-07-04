@@ -39,8 +39,8 @@
             ut.userName,
             ut.password,
             ut.email,
-            ut.create_dt
-            ut.update_dt
+            ut.create_dt,
+            ut.update_dt,
 
             urt.user_role_id,
             urt.user_id AS urt_user_id,
@@ -65,8 +65,8 @@
         ut.userName,
         ut.password,
         ut.email,
-        ut.create_dt
-        ut.update_dt
+        ut.create_dt,
+        ut.update_dt,
 
         urt.user_role_id,
         urt.user_id AS urt_user_id,
@@ -90,8 +90,8 @@
         ut.userName,
         ut.password,
         ut.email,
-        ut.create_dt
-        ut.update_dt
+        ut.create_dt,
+        ut.update_dt,
 
         urt.user_role_id,
         urt.user_id AS urt_user_id,
